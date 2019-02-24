@@ -29,14 +29,14 @@ let model = {
 let logic = {
     add: function(a, b, lastResult) {
         let result = 0;
-        if (a && b) {
-            result = a + b;
-        } else if (a) {
+        if (a === undefined && b === undefined) {
+            result = lastResult;
+        } else if (b === undefined) {
             result = a + lastResult;
-        } else if (b){
+        } else if (a === undefined){
             result = b + lastResult;
         } else {
-            result = lastResult;
+            result = a + b;
         }
         return result;
     }
@@ -52,25 +52,13 @@ let view = {
 let a = undefined;
 let b = undefined;
 
-// run app
-// state (last result) before: 0 
-handler.add();
-// console.log: 0
+handler.add();  // -> ?
 
-// ---
-a = 3
-// state before: 0
-handler.add();
-// console.log: 3
+a = 2;
+handler.add();  // -> ?
 
-// ---
-b = 5
-// state before: 3
-handler.add();
-// console.log: 8
+b = -1;
+handler.add();  // -> ?
 
-// ---
-a = undefined
-// state before: 8
-handler.add();
-// console.log: 13
+a = undefined;
+handler.add();  // -> ?
